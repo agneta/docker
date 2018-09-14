@@ -16,7 +16,4 @@ RUN apk -v --update add \
     coreutils \
     su-exec && \
     apk -v --purge del py-pip && \
-    rm /var/cache/apk/* && \
-    mkdir -p /home/agneta/app
-
-WORKDIR /home/agneta/app
+    rm /var/cache/apk/* 
