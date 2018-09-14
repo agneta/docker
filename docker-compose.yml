@@ -1,6 +1,6 @@
 version: '2'
 services:
   base:
-    image: 'agneta/base:0.15.0'
+    image: 'agneta/base:latest'
     build:
       context: .
