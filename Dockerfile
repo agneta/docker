@@ -1,4 +1,4 @@
-FROM node:9-alpine
+FROM node:8-alpine
 
 RUN apk -v --update add \
     python \
@@ -10,7 +10,6 @@ RUN apk -v --update add \
     bash \
     libc6-compat \
     gawk \
-    shadow \
     sed \
     grep \
     bc \
@@ -18,10 +17,6 @@ RUN apk -v --update add \
     su-exec && \
     apk -v --purge del py-pip && \
     rm /var/cache/apk/* && \
-    mkdir -p agneta/app
+    mkdir -p /home/agneta/app
 
-WORKDIR agneta/app
-
-ADD bootstrap.sh /
-RUN chmod 700 /bootstrap.sh && \
-    /bootstrap.sh
+WORKDIR /home/agneta/app
