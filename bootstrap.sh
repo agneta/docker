@@ -1,6 +1,3 @@
-npm config set cache /home/agneta/.cache/npm --global
-npm config set package-lock false
-
 export HOME=/home/agneta
 export NAME=agneta
 export USER_ID=2000
