@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:9-alpine
 
 RUN apk -v --update add \
     python \
@@ -10,6 +10,7 @@ RUN apk -v --update add \
     bash \
     libc6-compat \
     gawk \
+    shadow \
     sed \
     grep \
     bc \
@@ -17,21 +18,12 @@ RUN apk -v --update add \
     su-exec && \
     apk -v --purge del py-pip && \
     rm /var/cache/apk/* && \
-    mkdir -p /home/agneta/app
+    mkdir -p agneta/app
 
-WORKDIR /home/agneta/app
+WORKDIR agneta/app
 
-RUN npm config set cache /home/agneta/.cache/npm --global && \
-    npm config set package-lock false && \
-    export HOME=/home/agneta && \
-    export USER=agneta && \
-    export USER_ID=501 && \
-    export GROUP_ID=20 && \
-    USER_ID=${USER_ID:-9001} && \
-    GROUP_ID=${GROUP_ID:-9001} && \
-    deluser --remove-home node && \
-    addgroup -S -g $GROUP_ID $USER && \
-    adduser -S -u $USER_ID -G $USER $USER && \
-    chown -R $USER:$USER $HOME
+ADD bootstrap.sh /
+RUN chmod 700 /bootstrap.sh && \
+    /bootstrap.sh
 
 USER agneta
