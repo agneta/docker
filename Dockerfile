@@ -20,7 +20,7 @@ RUN apk -v --update add \
     rm /var/cache/apk/* && \
     mkdir -p /home/agneta/app
 
-WORKDIR home/agneta/app
+WORKDIR /home/agneta/app
 
 ADD bootstrap.sh /
 RUN chmod 700 /bootstrap.sh && \
