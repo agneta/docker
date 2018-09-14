@@ -1,5 +1,4 @@
 FROM node:8-alpine
-ENV NPM_CONFIG_PREFIX=/home/agneta/.npm-global
 
 RUN apk -v --update add \
     python \
@@ -19,16 +18,16 @@ RUN apk -v --update add \
     su-exec && \
     apk -v --purge del py-pip && \
     rm /var/cache/apk/* && \
-    mkdir -p agneta/app
+    mkdir -p /home/agneta/app
 
-WORKDIR agneta/app
+WORKDIR home/agneta/app
 
 ADD bootstrap.sh /
 RUN chmod 700 /bootstrap.sh && \
     /bootstrap.sh
-
 USER agneta
 
+ENV NPM_CONFIG_PREFIX=/home/agneta/.npm-global
 RUN npm config set cache /home/agneta/.cache/npm --global && \
     npm config set package-lock false && \
     npm install --global --prefer-offline agneta-cli && \
