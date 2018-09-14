@@ -28,10 +28,12 @@ RUN chmod 700 /bootstrap.sh && \
 USER agneta
 
 ENV NPM_CONFIG_PREFIX=/home/agneta/.npm-global
+ENV NODE_ENV=production
+
 RUN npm config set cache /home/agneta/.cache/npm --global && \
-    npm config set package-lock false && \
     npm config set cache-min 9999999 && \
-    npm install --global --prefer-offline agneta-cli && \
-    npm install --prefer-offline --no-shrinkwrap --loglevel info agneta-platform
+    npm install --global agneta-cli && \
+    npm install agneta-platform && \
+    rm -r /home/agneta/app/* 
 
 
