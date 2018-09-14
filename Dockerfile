@@ -25,5 +25,3 @@ WORKDIR agneta/app
 ADD bootstrap.sh /
 RUN chmod 700 /bootstrap.sh && \
     /bootstrap.sh
-
-USER agneta
