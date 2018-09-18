@@ -27,13 +27,15 @@ RUN chmod 700 /bootstrap.sh && \
     /bootstrap.sh
 USER agneta
 
-ENV NPM_CONFIG_PREFIX=/home/agneta/.npm-global
-ENV NODE_ENV=production
+ENV NPM_CONFIG_PREFIX "/home/agneta/.npm-global"
+ENV PATH "$PATH:/home/agneta/.npm-global/bin"
+ENV NODE_ENV "production"
 
 RUN npm config set cache /home/agneta/.cache/npm --global && \
     npm config set cache-min 9999999 && \
-    npm install --global agneta-cli && \
-    npm install agneta-platform && \
-    rm -r /home/agneta/app/* 
+    npm set progress=false
+RUN npm install @agneta/cli@0.14.11 --global --loglevel info --prefer-offline --no-shrinkwrap --ignore-scripts
+RUN npm install @agneta/platform@0.16.14 --loglevel info --prefer-offline --no-shrinkwrap --ignore-scripts
+RUN rm -r /home/agneta/app/* 
 
 
