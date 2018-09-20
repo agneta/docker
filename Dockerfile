@@ -34,8 +34,8 @@ ENV NODE_ENV "production"
 RUN npm config set cache /home/agneta/.cache/npm --global && \
     npm config set cache-min 9999999 && \
     npm set progress=false
-RUN npm install @agneta/cli@0.14.11 --global --loglevel info --prefer-offline --no-shrinkwrap --ignore-scripts
-RUN npm install @agneta/platform@0.16.14 --loglevel info --prefer-offline --no-shrinkwrap --ignore-scripts
+RUN npm install @agneta/cli@0.14.13 --global --loglevel info --prefer-offline --no-shrinkwrap --ignore-scripts
+RUN npm install @agneta/platform@0.16.19 --loglevel info --prefer-offline --no-shrinkwrap --ignore-scripts
 RUN rm -r /home/agneta/app/* 
 
 
